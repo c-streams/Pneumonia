@@ -1,4 +1,5 @@
 # Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
+#### Caitlin Streamer 
 
 ### Executive Summary
 
