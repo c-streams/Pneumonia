@@ -1,6 +1,6 @@
 # Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
 #### Caitlin Streamer 
-
+-------------------
 ### Executive Summary
 
 Medical imaging, such as X-rays, are important tools used to help diagnose certain conditions. The limited availability of highly trained doctors who can interpret these images, however, can lead to a slow diagnostic process, delaying needed treatment. Childhood pneumonia is one such condition that when diagnosed early can be life saving. According to the World Health Organization, pneumonia is responsible for 16% of child deaths under 5 years old [1]. In an attempt to address this problem, I have built an image based deep learning model to diagnose pediatric pneumonia from chest X-rays. It is my hope that such a model could be utilized to expedite the disease screening process and serve as a second opinion to trained physicians.
