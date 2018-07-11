@@ -1,4 +1,4 @@
-# Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
+## Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
 #### Caitlin Streamer 
 -------------------
 ### Executive Summary
@@ -131,7 +131,7 @@ In terms of next steps, I would like to further explore different transfer learn
 
 Since my multi-class classification models were not quite as good at differentiating pneumonia cases, I would like to attempt another binary classification to properly distinguish bacterial from viral pneumonia. Additional data would most likely be required since there were only 1000+ viral images in the current dataset, which I believe was the cause of consistent underperformance of my 3 models for identifying viral pneumonia.
 
-
+--------------------
 ### References
 
 [1] World Health Organization,”Fact Sheet: Pneumonia”, (2016), http://www.who.int/en/news-room/fact-sheets/detail/pneumonia
