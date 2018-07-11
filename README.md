@@ -1,3 +1,4 @@
+
 ## Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
 #### Caitlin Streamer 
 -------------------
@@ -13,6 +14,7 @@ Optimizing for sensitivity with a target specificity over 65%, my binary classif
 
 To conclude, my results demonstrate the feasibility of using a CNN to diagnose pneumonia from chest X-rays with a respectable accuracy. Future exploration is required to further improve these models as well as replicate the findings of Kermany et al.
 
+-----------------------------
 
 ### Introduction
 
