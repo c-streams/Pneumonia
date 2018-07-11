@@ -1,6 +1,6 @@
 # Diagnosing Pediatric Pneumonia Using Convolutional Neural Networks
 
-## Executive Summary
+# Executive Summary
 
 Medical imaging, such as X-rays, are important tools used to help diagnose certain conditions. The limited availability of highly trained doctors who can interpret these images, however, can lead to a slow diagnostic process, delaying needed treatment. Childhood pneumonia is one such condition that when diagnosed early can be life saving. According to the World Health Organization, pneumonia is responsible for 16% of child deaths under 5 years old [1]. In an attempt to address this problem, I have built an image based deep learning model to diagnose pediatric pneumonia from chest X-rays. It is my hope that such a model could be utilized to expedite the disease screening process and serve as a second opinion to trained physicians.
 
@@ -25,7 +25,7 @@ Limited availability of highly trained doctors who can interpret chest X-rays, h
 
 Artificial intelligence (AI) has the potential to revolutionize the field of radiology and transform image based medical diagnostics and treatment. While even highly trained physicians may see hundreds of thousands of X-rays in the course of their training and career, a machine learning model can be trained on millions. Interpretability and reliability, however, remain challenges for such AI diagnostic systems [2]. These challenges notwithstanding, these systems can still play an important role as a support system for human experts in expediting disease screening processes and serving as a second opinion (Figure 2).
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/ai.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/ai.png">
 
 Armed with AI systems, studies have shown that physicians make more accurate predictions, leading to better patient outcomes [3].
 
@@ -33,7 +33,7 @@ Armed with AI systems, studies have shown that physicians make more accurate pre
 
 My goal was to build a convolution neural network from scratch (i.e. newly trained weights) to diagnose pneumonia from pediatric chest X-rays and evaluate its performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras models trained on the ImageNet dataset.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/problem.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/problem.png">
 
 I split this project into two parts, defined by a binary classification problem and a multi-class classification problem. Identifying pneumonia from normal cases and then distinguishing bacterial and viral pneumonia from normal cases (Figure 3).
 
@@ -47,7 +47,7 @@ The dataset  is composed of a train and test folder, each with normal and pneumo
 
 In order to determine the amount of preprocessing required before modeling, I investigated the images themselves. Sample X-rays of each class are shown below in Figure 4.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/xrays.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/xrays.png">
 
 From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. Luckily machine learning is here to help!
 
@@ -57,7 +57,7 @@ Next I examined how many color channels were in the images, as well as their siz
 
 Curious about the color distribution differences in the images, I plotted color histograms for each of the classes (Figure 5).  While there does appear to be differences in the distribution in each class, there are not consistent. I plotted different samples and got widely different results. The only consistent trend was a large peak at pixel 0 or black, which is to be expected from X-rays.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/colorhist.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/colorhist.png">
 
 After standardizing the images, I next investigated data augmentation to increase the overall size of my training set in order to improve the performance of my CNN model. I used the Keras Image Augmentation API, which generates images in real time during the model fitting process. Considering the application of my end model (to diagnose X-rays images), I chose augmentation parameters that are appropriate for variations we might see in X-rays. These include shifting the width and height of the X-rays. Supplementing the training dataset with a variety of image positions will help improve the generalization of my model so that it is not trained on a specific kind of positioning.
 
@@ -67,7 +67,7 @@ I created CNNs from scratch (i.e. with newly trained weights) and evaluated thei
 
 Training a CNN from scratch (starting with a random initialization of weights) is often rare in practice because it is rare to get a large enough dataset to train. Transfer learning is the process of using pre-trained weights or extracted features from a pre-trained network (Figure 6). These pre-trained networks typically are very deep networks that have been trained on datasets composed of millions of images. These deep networks can take weeks to train using vast amounts of computing power. Rather than reinventing the wheel, we can use these networks as a basis to classify similar images since the high level features will be similar.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/transfer.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/transfer.png">
 
 In order to speed up the time to train these deep networks, the models were trained on an AWS Deep Learning AMI (Ubuntu 16.4) Version 11.0 GPU enabled computer with 4 virtual CPUs and 61 GiB memory.
 
@@ -75,15 +75,15 @@ In order to speed up the time to train these deep networks, the models were trai
 
 After some trial and error, I decided to build a simple binary CNN with 3 convolution/pooling layers and 2 dense layers in order to minimize the number of parameters. I increased the filter size with each convolution layer in order to gradually identify more details from the x-rays. In order to improve the performance of my model, I implemented a callback to reduce the learning rate of the model when the test loss does not improve by a specified amount. Reducing the learning rate is known to improve model performance when learning plateaus. The final model performed the best for the binary problem. It achieved a AUC-ROC score of 0.96, 88% accuracy,  99% sensitivity, and 71% specificity. From Figure 7, you can see that the number of false negatives (5) has been minimized.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/matrix1.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/matrix1.png">
 
 The receiver operator curve (ROC) explains the balance between the true positive and true negative rates (Figure 8). The AUC-ROC score is the area under this curve, which at its best is 1.0.  With a score of 0.96, my model did well.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/roc1.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/roc1.png">
 
 While it achieved good metrics, the model was still relatively overfit as demonstrated by tracking the train and validation loss and accuracy scores during training (Figure 9). The large separation between the test and validation curve indicates overfitting.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/cnn.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/cnn.png">
 
 ### Transfer Learning VGG16 Model & Evaluation
 
@@ -91,15 +91,15 @@ I selected the prebuilt Keras VGG16 deep learning model trained on the ImageNet 
 
 The multi-class VGG16 model performed the best for this problem. While still overfit, it has respectable results. It achieved a AUC-ROC score of 0.95 with 82% accuracy, 99% sensitivity, and 66% specificity (Figure 10).  The number of false negatives (combined viral and bacterial false negatives) is 3 out of a 624 test set.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/matrix2.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/matrix2.png">
 
 For a multi-class problem, each class has its own ROC curve as shown in Figure 11. The average AUC-ROC score was 0.95.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/roc2.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/roc2.png">
 
 From Figure 12, it can be seen that the VGG16 model also experienced some over fitting. The train and validation loss scores actually move in the opposite direction.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/model.png" width="40%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/model.png">
 
 
 ### Transfer Learning InceptionV3 Model & Evaluation
