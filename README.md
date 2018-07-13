@@ -17,7 +17,7 @@ To conclude, my results demonstrate the feasibility of using a CNN to diagnose p
 
 ### Introduction
 
-Pneumonia is a type of acute respiratory infection impacting the lungs that is caused by a variety of infectious agents such as bacteria, viruses, and fungi [1]. When afflicted with pneumonia, alveoli in the lungs fill with fluid and pus making it difficult to breath and prevent the intake of oxygen (Figure 1). In children, pneumonia is the largest infectious cause of death worldwide, responsible for 16% of deaths under 5 years old [1]. The most common treatment for bacterial pneumonia is antibiotics while for viral pneumonia is supportive care and antiviral medication [2]. If left untreated, pneumonia can be fatal. Because different types of pneumonia require different treatments, chest X-rays are an important tool used to help distinguish types in addition to presentable symptoms. Early detection and treatment is critical to reducing pneumonia fatalities in children.
+Pneumonia is a type of acute respiratory infection impacting the lungs that is caused by a variety of infectious agents such as bacteria, viruses, and fungi [1]. When afflicted with pneumonia, alveoli in the lungs fill with fluid and pus making it difficult to breath and prevent the intake of oxygen (Figure 1). In children, pneumonia is the largest infectious cause of death worldwide, responsible for 16% of deaths under 5 years old [1]. The most common treatment for bacterial pneumonia is antibiotics while for viral pneumonia is supportive care and antiviral medication [2]. If left untreated, pneumonia can be fatal. Because different types of pneumonia require different treatments, chest X-rays are an important tool used to help distinguish types in addition to presentable symptoms. Also considering the overprescription of antibiotics, it is key to not only diagnose pneumonia but its cause. Early detection and treatment is therefore critical to reducing pneumonia fatalities in children.
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/pne.png" width="40%" height="50%">
 
@@ -25,19 +25,19 @@ Limited availability of highly trained doctors who can interpret chest X-rays, h
 
 ### Artificial Intelligence as Clinical Decision Support Systems
 
-Artificial intelligence (AI) has the potential to revolutionize the field of radiology and transform image based medical diagnostics and treatment. While even highly trained physicians may see hundreds of thousands of X-rays in the course of their training and career, a machine learning model can be trained on millions. Interpretability and reliability, however, remain challenges for such AI diagnostic systems [2]. These challenges notwithstanding, these systems can still play an important role as a support system for human experts in expediting disease screening processes and serving as a second opinion (Figure 2).
+Artificial intelligence (AI) has the potential to revolutionize the field of radiology and transform image based medical diagnostics and treatment. Currently, it can take some time to diagnose pneumonia. A doctor will examine the patient for outward symptoms and take a chest X-ray. If there is fluid or congestion a radiologist can diagnose pneumonia and might order further tests to identify the cause. The type of pneumonia can sometimes be determined from the X-ray. Without getting into the medical details, the differences are subtle, which is why further tests are usually performed to determine the right treatment. With additional tests, the diagnostic process gets bogged down. There is therefore value in automating part of this diagnostic process by eliminating the need for additional tests to speed up time to diagnosis, allow doctors to quickly treat their patients. Machine learning models are able to pick up on these subtle differences to identify the presence of pneumonia and its likely cause.  Interpretability and reliability, however, remain challenges for such AI diagnostic systems [2]. These challenges notwithstanding, these systems can still play an important role as a support system for human experts in expediting disease screening processes and serving as a second opinion (Figure 2).
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/ai.png">
 
-Armed with AI systems, studies have shown that physicians make more accurate predictions, leading to better patient outcomes [3].
+Armed with AI systems, studies have shown that physicians make more accurate predictions than either the system or doctor alone, leading to better patient outcomes [3].
 
 ### Problem Statement
 
-My goal was to build a convolution neural network from scratch (i.e. newly trained weights) to diagnose pneumonia from pediatric chest X-rays and evaluate its performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras models trained on the ImageNet dataset.
+My goal was to address this problem of slow diagnostic processes, specifically for pediatric pneumonia, and utilize 2 different machine learning approaches: convolutional neural networks and transfer learning.
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/problem.png">
 
-I split this project into two parts, defined by a binary classification problem and a multi-class classification problem. Identifying pneumonia from normal cases and then distinguishing bacterial and viral pneumonia from normal cases (Figure 3).
+I split this project into two parts, defined by a binary classification problem and a multi-class classification problem. Identifying pneumonia from normal cases and then distinguishing bacterial and viral pneumonia from normal cases (Figure 3). For each problem, I built a convolution neural network from scratch (i.e. newly trained weights) and evaluated its performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras models trained on the ImageNet dataset.
 
 ### Dataset
 
@@ -51,7 +51,7 @@ In order to determine the amount of preprocessing required before modeling, I in
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/xrays.png">
 
-From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. Luckily machine learning is here to help!
+From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. Radiologists will typically look for the spread of the inflammation and the presence of air bronchograms to help distinguish bacterial from viral pneumonia. 
 
 I examined the class balances in the dataset and discovered that there are more cases of pneumonia in my dataset than normal ones. There are more cases of bacterial pneumonia in particular. Unbalanced classes are not uncommon with medical data. Classification algorithms perform better with an even ratio of classes otherwise the minority class is typically underrepresented as a rare event. I therefore balanced the classes by oversampling (sampling with replacement) the minority class.
 
@@ -59,7 +59,7 @@ Next I examined how many color channels were in the images, as well as their siz
 
 Curious about the color distribution differences in the images, I plotted color histograms for each of the classes (Figure 5).  While there does appear to be differences in the distribution in each class, there are not consistent. I plotted different samples and got widely different results. The only consistent trend was a large peak at pixel 0 or black, which is to be expected from X-rays.
 
-<img src="https://github.com/c-streams/Pneumonia/blob/master/images/colorhist.png" width="50%" height="50%">
+<img src="https://github.com/c-streams/Pneumonia/blob/master/images/color.png" width="50%" height="50%">
 
 After standardizing the images, I next investigated data augmentation to increase the overall size of my training set in order to improve the performance of my CNN model. I used the Keras Image Augmentation API, which generates images in real time during the model fitting process. Considering the application of my end model (to diagnose X-rays images), I chose augmentation parameters that are appropriate for variations we might see in X-rays. These include shifting the width and height of the X-rays. Supplementing the training dataset with a variety of image positions will help improve the generalization of my model so that it is not trained on a specific kind of positioning.
 
@@ -67,7 +67,7 @@ After standardizing the images, I next investigated data augmentation to increas
 
 I created CNNs from scratch (i.e. with newly trained weights) and evaluated their performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras CNN models trained on the ImageNet dataset.
 
-Training a CNN from scratch (starting with a random initialization of weights) is often rare in practice because it is rare to get a large enough dataset to train. Transfer learning is the process of using pre-trained weights or extracted features from a pre-trained network (Figure 6). These pre-trained networks typically are very deep networks that have been trained on datasets composed of millions of images. These deep networks can take weeks to train using vast amounts of computing power. Rather than reinventing the wheel, we can use these networks as a basis to classify similar images since the high level features will be similar.
+Training a CNN from scratch (starting with a random initialization of weights) is often rare in practice because it is rare to get a large enough dataset to train. Transfer learning is the process of using pre-trained weights or extracted features from a pre-trained network (Figure 6). These pre-trained networks typically are very deep networks that have been trained on datasets composed of millions of images. These deep networks can take weeks to train using vast amounts of computing power. Rather than reinventing the wheel, we can use these networks as a basis to classify similar images since the high level features will be similar. 
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/transfer.png" width="70%" height="70%">
 
@@ -116,7 +116,7 @@ All 6 models suffered from overfitting in that the train and test loss and accur
 
 I evaluated my models on various metrics, such as AUC-ROC, accuracy, precision, sensitivity, and specificity, however, I paid particular attention to sensitivity. In the case of diagnosing pneumonia, we want to minimize predicting false negatives, that is telling a patient they don’t have pneumonia when they do. The consequences of a false negative can result in no treatment, which can be deadly. Alternatively, false positives, telling a patient they have pneumonia when they are healthy, isn’t as damaging to the patient. In this case, a healthy patient would receive treatment, like antibiotics, that won’t impact their health as negatively. In the worst possible case, antibiotics are known to decrease the diversity of bacteria in the gut, which can lead to stress, depression, and obesity [5]. It is important to note that there should be a balance between sensitivity and specificity in the case of pneumonia because the over prescription of antibiotics has led to the rise of antibiotic resistant bacteria. In fact, studies have found that upwards of 40% of antibiotics prescribed for acute respiratory tract infections, like pneumonia, are unnecessary [5]. Should this current trend of over prescription continue, it is possible that the bacteria that cause various infectious diseases will be resistant to antibiotics. With this in mind, I designed my CNN to minimize sensitivity to a certain extent, without letting specificity drop below 65%.
 
-Considering these metrics, my binary CNN performed the best with a AUC-ROC score of 0.96, 88% accuracy, 99% sensitivity, and 71% specificity. These results are close to that of human experts. I suspect that my model performed better than the transfer learning approaches due to its simplicity. Since neural networks inherently overfit, a simpler model architecture will reduce overfitting.
+Considering these metrics, my binary CNN performed the best with a AUC-ROC score of 0.96, 88% accuracy, 99% sensitivity, and 71% specificity. These results are close to that of human experts. I suspect that my model performed better than the transfer learning approaches due to its simplicity. Since neural networks inherently overfit, a simpler model architecture will reduce overfitting. As models get more complex, there are more parameters and weights to train, increasing the time it takes to train, which can lead to diminishing returns on increasing performance. 
 
 The multi-class VGG16 model performed the best for its problem.  While still overfit,  it had respectable results with a AUC-ROC score of 0.95, 82% accuracy, 99% sensitivity, and 66% specificity. These results are almost comparable to those of human experts. When looking at the bacterial and viral cases, predictions for viral were almost always worse. I believe this has to do with the smaller dataset for viral. It would seem that oversampling is not sufficient.
 
