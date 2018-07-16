@@ -51,7 +51,7 @@ In order to determine the amount of preprocessing required before modeling, I in
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/xrays.png">
 
-From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. The normal image is characterized by a lack of opacity. In the bacterial case, the infection is much more consolidated (top right in middle image). In viral, it is more spread out in a diffuse interstitial pattern [2]. 
+From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. The normal image is characterized by a lack of opacity. In the bacterial case, the infection is much more consolidated (top left in middle image). In viral, it is more spread out in a diffuse interstitial pattern [2]. 
 
 I examined the class balances in the dataset and discovered that there are more cases of pneumonia in my dataset than normal ones. There are more cases of bacterial pneumonia in particular. Unbalanced classes are not uncommon with medical data. Classification algorithms perform better with an even ratio of classes otherwise the minority class is typically underrepresented as a rare event. I therefore balanced the classes by oversampling (sampling with replacement) the minority class.
 
