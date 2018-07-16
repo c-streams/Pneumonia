@@ -124,7 +124,7 @@ Interestingly enough, the InceptionV3 model performed the worst in both problems
 
 If choosing between both transfer learning models, I recommend VGG16 over InceptionV3 since it has a simpler architecture. The base InceptionV3 model is more complex than the VGG16 with 159 layers compared to the 23 of VGG16.
 
-Nonetheless, I was able to reach my goal and demonstrate the feasibility of using CNNs and transfer learning to diagnose pneumonia from chest X-rays with respectable results.
+Nonetheless, I was able to reach my goal and demonstrate the feasibility of using CNNs and transfer learning to diagnose pneumonia from chest X-rays with respectable results. Models like these can be a great tool for physicians to reduce the time to diagnosis, thereby improving patient outcomes. 
 
 ### Next Steps
 
