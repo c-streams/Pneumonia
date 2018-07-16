@@ -11,7 +11,7 @@ Using Keras with a TensorFlow backend, I built newly trained Convolutional Neura
 
 Optimizing for sensitivity with a target specificity over 65%, my binary classification CNN performed the best with a AUC-ROC score of 0.96, 88% accuracy, 99% sensitivity, and 71% specificity. These results are close to that of human experts. I suspect that my model performed better than the transfer learning approaches due to its simplicity. Since neural networks inherently overfit, a simpler model architecture will reduce complexity which can cause overfitting. Optimizing for the same metrics, the multi-class VGG16 model performed the best with a AUC-ROC score of 0.95, 82% accuracy, 99% sensitivity, and 66% specificity. Identification of viral pneumonia was consistently lower in all 3 multi-class models. I suspect this is due to the small sample size available. I believe additional data is required to improve the performance of the 3 class models.
 
-To conclude, my results demonstrate the feasibility of using a CNN to diagnose pneumonia from chest X-rays with a respectable accuracy. Future exploration is required to further improve these models as well as replicate the findings of Kermany et al.
+My results demonstrate the feasibility of using a CNN to diagnose pneumonia from chest X-rays with a respectable accuracy. Future exploration is required to further improve these models as well as replicate the findings of Kermany et al.
 
 -----------------------------
 
