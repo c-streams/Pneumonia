@@ -25,7 +25,7 @@ Limited availability of highly trained doctors who can interpret chest X-rays, h
 
 ### Artificial Intelligence as Clinical Decision Support Systems
 
-Artificial intelligence (AI) has the potential to revolutionize the field of radiology and transform image based medical diagnostics and treatment. Currently, it can take some time to diagnose pneumonia. A doctor will examine the patient for outward symptoms and take a chest X-ray. If there is fluid or congestion a radiologist can diagnose pneumonia and might order further tests to identify the cause. The type of pneumonia can sometimes be determined from the X-ray. Without getting into the medical details, the differences are subtle, which is why further tests are usually performed to determine the right treatment. With additional tests, the diagnostic process gets bogged down. There is therefore value in automating part of this diagnostic process by eliminating the need for additional tests to speed up time to diagnosis, allow doctors to quickly treat their patients. Machine learning models are able to pick up on these subtle differences to identify the presence of pneumonia and its likely cause.  Interpretability and reliability, however, remain challenges for such AI diagnostic systems [2]. These challenges notwithstanding, these systems can still play an important role as a support system for human experts in expediting disease screening processes and serving as a second opinion (Figure 2).
+Artificial intelligence (AI) has the potential to revolutionize the field of radiology and transform image based medical diagnostics and treatment. Currently, it can take some time to diagnose pneumonia. A doctor will examine the patient for outward symptoms and take a chest X-ray. If there is fluid or congestion a radiologist can diagnose pneumonia and might order further tests to identify the cause. The type of pneumonia can sometimes be determined from the X-ray. Without getting into the medical details, the differences are subtle, which is why further tests are usually performed to determine the right treatment. With additional tests, the diagnostic process gets bogged down. In addition, the process can be slowed down simply by the limited number of doctors available, which is most true in parts of the world with the highest rates of pneumonia. There is therefore value in automating part of this diagnostic process to speed up time to diagnosis, allow doctors to quickly treat their patients. Machine learning models are able to pick up on these subtle differences to identify the presence of pneumonia and its likely cause.  Interpretability and reliability, however, remain challenges for such AI diagnostic systems [2]. These challenges notwithstanding, these systems can still play an important role as a support system for human experts in expediting disease screening processes and serving as a second opinion (Figure 2).
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/ai.png">
 
@@ -33,7 +33,7 @@ Armed with AI systems, studies have shown that physicians make more accurate pre
 
 ### Problem Statement
 
-My goal was to address this problem of slow diagnostic processes, specifically for pediatric pneumonia, and utilize 2 different machine learning approaches: convolutional neural networks and transfer learning.
+My goal was to address the problem of slow diagnostic processes in pediatric pneumonia by applying partial automation in the form of two different machine learning approaches: convolutional neural networks and transfer learning.
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/problem.png">
 
@@ -51,7 +51,7 @@ In order to determine the amount of preprocessing required before modeling, I in
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/xrays.png">
 
-From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. Radiologists will typically look for the spread of the inflammation and the presence of air bronchograms to help distinguish bacterial from viral pneumonia. 
+From the X-rays above, it is not immediately obvious to the untrained eye which cases are which. The normal image is characterized by a lack of opacity. In the bacterial case, the infection is much more consolidated (top right in middle image). In viral, it is more spread out in a diffuse interstitial pattern [2]. 
 
 I examined the class balances in the dataset and discovered that there are more cases of pneumonia in my dataset than normal ones. There are more cases of bacterial pneumonia in particular. Unbalanced classes are not uncommon with medical data. Classification algorithms perform better with an even ratio of classes otherwise the minority class is typically underrepresented as a rare event. I therefore balanced the classes by oversampling (sampling with replacement) the minority class.
 
