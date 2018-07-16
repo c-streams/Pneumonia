@@ -37,7 +37,7 @@ My goal was to address the problem of slow diagnostic processes in pediatric pne
 
 <img src="https://github.com/c-streams/Pneumonia/blob/master/images/problem.png">
 
-I split this project into two parts, defined by a binary classification problem and a multi-class classification problem. Identifying pneumonia from normal cases and then distinguishing bacterial and viral pneumonia from normal cases (Figure 3). For each problem, I built a convolution neural network from scratch (i.e. newly trained weights) and evaluated its performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras models trained on the ImageNet dataset.
+I split this project into two parts, defined by a binary classification problem and a multi-class classification problem. I sought to identify pneumonia from normal cases and then distinguish bacterial and viral pneumonia from normal cases (Figure 3). For each problem, I built a convolution neural network from scratch (i.e. newly trained weights) and evaluated its performance against a transfer learning approach with the prebuilt VGG16 and InceptionV3 Keras models trained on the ImageNet dataset.
 
 ### Dataset
 
